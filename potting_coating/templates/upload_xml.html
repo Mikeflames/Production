@@ -1,0 +1,170 @@
+<!-- Take Either XML file as input -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pc.css' %}">
+    <title>Poating-Coating Application</title>
+    <style>
+        li{
+            color: black !important;
+            display: inline;
+            padding: 20px;
+        }
+button {
+  display: inline-block;
+  background-color: #7b38d8;
+  padding: 0.5px;
+  width: 200px;
+  color: #ffffff;
+  text-align: center;
+  border: 4px double #000000;
+  border-radius: 20px;
+  font-size: 21px;
+  cursor: pointer;
+  margin: 5px;
+  -webkit-transition: all 0.5s; /* add this line, chrome, safari, etc */
+  -moz-transition: all 0.5s; /* add this line, firefox */
+  -o-transition: all 0.5s; /* add this line, opera */
+  transition: all 0.5s; /* add this line */
+}
+button:hover {
+  background-color: green;
+}
+body{
+    background-color: rgb(198, 227, 245)
+}
+select {
+    width: 160px;
+    background-color: skyblue;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: 5px;
+    border: 4px double #000000;
+}
+    </style>
+</head>
+
+<body>
+    <h1><u><center>Potting-Coating Application</center></u></h1>
+    <h3>Upload XML and Part- Table File</h3>
+    <form action="{% url 'pc' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="xml_file">XML file:</label> 
+        <input type="file" name="xml_file" class = 'heading' >
+        <label for="ptf_file">Part-Table file:  </label>
+        <input type="file" name="ptf_file" class = 'heading'>
+        
+    
+        {% csrf_token %}
+        <select name="selected_option">
+        <option value="2">D&M board</option>
+        <option value="1">Wireline board</option>
+        <option value="3">Other</option>
+        </select>
+        <!-- <input type="submit" value="Result"> -->
+        <button type="submit">Result</button>
+    </form>
+    <!-- <button type="button">Submit</button> -->
+    {% if result %}
+        <h3>Results for File: <u>{{ uploaded_xml }}</u></h3>
+        <!-- <h2></h2> -->
+        <h2 class = 'heading'>Potting and Underfill for Top Side Components</h2>
+        {% if tlist1 %}
+        <ul>
+        {% for item in tlist1 %}
+            <li class = 'listitem'>{{ item }}</li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>The list is empty [].</p>
+        {% endif %}
+    
+        <h2 class = 'heading'>Coating and Underfill for Top Side Components</h2>
+        {% if tlist2 %}
+            <ul>
+            {% for item in tlist2 %}
+                <li class = 'listitem'>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <p>The list is empty [].</p>
+        {% endif %}
+    
+        <h2 class = 'heading'>ConsultCPE for Top Components</h2>
+        {% if tconsultcpe %}
+            <ul>
+            {% for item in tconsultcpe %}
+                <li class = 'listitem'>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <p>The list is empty [].</p>
+        {% endif %}
+    
+        <h2 class = 'heading'>Potting and Underfill for Bottom Side Components</h2>
+        {% if blist1 %}
+            <ul>
+            {% for item in blist1 %}
+                <li class = 'listitem'>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <p>The list is empty [].</p>
+        {% endif %}
+    
+        <h2 class = 'heading'>Coating and Underfill for Bottom Side Components</h2>
+        {% if blist2 %}
+            <ul>
+            {% for item in blist2 %}
+                <li class = 'listitem'>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <p>The list is empty [].</p>
+        {% endif %}
+    
+        <h2 class = 'heading'>ConsultCPE for Bottom Components</h2>
+        {% if bconsultcpe %}
+            <ul>
+            {% for item in bconsultcpe %}
+                <li class = 'listitem'>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <p>The list is empty [].</p>
+        {% endif %}
+    
+        <h2 class = 'heading'>OuputList is : </h2>
+            {% if outputlist %}
+            <ul>
+            {% for item in outputlist %}
+                <br>
+                <li style ="color: black;
+                /* background-size: contain;
+                background-color: yellow; */
+                font-size: 15px;
+                font-weight: bold;
+                font-family: Verdana, Arial, Helvetica, sans-serif;
+                text-decoration: solid;">{{ item }}</li>
+                </br>
+            {% endfor %}
+            </ul>
+            {% else %}
+            <p>The Outputlist is empty [].</p>
+            {% endif %}
+    {% endif %}
+
+</body>
+</html>
+
+
+
+
+  
+
