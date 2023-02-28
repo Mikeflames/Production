@@ -292,7 +292,7 @@ def finalrun(partdict,topdown,smtornot,ptf_file_content,option):
     print(topdown+"\n----------------------------------------------------------------------------\n")
     print("potting and underfill\n",list1,"\ncoating and underfill\n",list2,"\n","\nConsult CPE:\n",consultcpe)
     
-   
+
     
     line=f"\n{topdown} "#"\n------------------------------------------------------------------------------\n"
     # Text1.insert(END, line)
@@ -385,7 +385,7 @@ def dest_lbls():
 def mainloop1(ptf_file_content,xml_file,option):
     dest_lbls()
     try:
-        outputlist.append("\n--------------------------------------------\n")
+        ## outputlist.append("\n--------------------------------------------\n")
         
         #f=open(filepath.get())
         #data=json.load(f)

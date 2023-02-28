@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'pc.css' %}">
+    <script src = "{% static 'script.js' %}"></script>
     <title>Potting/Coating/Underfill Digital Guideline</title>
     <style>
         li{
@@ -20,12 +21,12 @@ button {
   padding: 0.5px;
   width: 200px;
   color: #ffffff;
-  text-align: center;
   border: 4px double #000000;
   border-radius: 20px;
   font-size: 21px;
   cursor: pointer;
-  margin: 5px;
+  margin: 20px;
+  margin-left: 35%;
   -webkit-transition: all 0.5s; /* add this line, chrome, safari, etc */
   -moz-transition: all 0.5s; /* add this line, firefox */
   -o-transition: all 0.5s; /* add this line, opera */
@@ -48,6 +49,8 @@ select {
     border: 4px double #000000;
 }
     </style>
+
+
 </head>
 
 <body>
@@ -73,92 +76,75 @@ select {
     <!-- <button type="button">Submit</button> -->
     {% if result %}
         <h3>Results for File: <u>{{ uploaded_xml }}</u></h3>
-        <!-- <h2></h2> -->
-        <h2 class = 'heading'>Potting and Underfill for Top Side Components</h2>
-        {% if tlist1 %}
+        <h2 class = 'heading'>TOP SIDE: {{top}}</h2>
+        <!-- <h2 class = 'heading'>Potting and Underfill for Top Side Components</h2> -->
+        {% if  top_list %}
+        <!-- <h2 class = 'heading'>Underfilled Part :-</h2> -->
+        <h3>Underfilled Part :-</h3>
         <ul>
-        {% for item in tlist1 %}
+        {% for item in top_list %}
+            <li class = 'listitem'>{{ item }}</li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>The list is empty [].</p> -->
+        {% endif %}
+
+
+        <h2 class = 'heading'>BOTTOM SIDE: {{bottom}}</h2>
+        {% if  bottom_list %}
+        <!-- <h2 class = 'heading'>Underfilled Part :-</h2> -->
+        <h3>Underfilled Part :-</h3>
+        <ul>
+        {% for item in bottom_list %}
             <li class = 'listitem'>{{ item }}</li>
         {% endfor %}
         </ul>
         {% else %}
         <p>The list is empty [].</p>
         {% endif %}
-    
-        <h2 class = 'heading'>Coating and Underfill for Top Side Components</h2>
-        {% if tlist2 %}
-            <ul>
-            {% for item in tlist2 %}
-                <li class = 'listitem'>{{ item }}</li>
-            {% endfor %}
-            </ul>
-        {% else %}
-        <p>The list is empty [].</p>
-        {% endif %}
-    
-        <h2 class = 'heading'>ConsultCPE for Top Components</h2>
-        {% if tconsultcpe %}
-            <ul>
-            {% for item in tconsultcpe %}
-                <li class = 'listitem'>{{ item }}</li>
-            {% endfor %}
-            </ul>
-        {% else %}
-        <p>The list is empty [].</p>
-        {% endif %}
-    
-        <h2 class = 'heading'>Potting and Underfill for Bottom Side Components</h2>
-        {% if blist1 %}
-            <ul>
-            {% for item in blist1 %}
-                <li class = 'listitem'>{{ item }}</li>
-            {% endfor %}
-            </ul>
-        {% else %}
-        <p>The list is empty [].</p>
-        {% endif %}
-    
-        <h2 class = 'heading'>Coating and Underfill for Bottom Side Components</h2>
-        {% if blist2 %}
-            <ul>
-            {% for item in blist2 %}
-                <li class = 'listitem'>{{ item }}</li>
-            {% endfor %}
-            </ul>
-        {% else %}
-        <p>The list is empty [].</p>
-        {% endif %}
-    
-        <h2 class = 'heading'>ConsultCPE for Bottom Components</h2>
-        {% if bconsultcpe %}
-            <ul>
-            {% for item in bconsultcpe %}
-                <li class = 'listitem'>{{ item }}</li>
-            {% endfor %}
-            </ul>
-        {% else %}
-        <p>The list is empty [].</p>
-        {% endif %}
-    
-        <h2 class = 'heading'>OuputList is : </h2>
-            {% if outputlist %}
-            <ul>
+
+        <div id="myList" style="display: none;">
             {% for item in outputlist %}
-                <br>
-                <li style ="color: black;
-                /* background-size: contain;
-                background-color: yellow; */
-                font-size: 15px;
-                font-weight: bold;
-                font-family: Verdana, Arial, Helvetica, sans-serif;
-                text-decoration: solid;">{{ item }}</li>
-                </br>
+                <!-- {{ item }}<br> -->
+                <li class = 'listitem'>{{ item }}</li><br>
             {% endfor %}
-            </ul>
-            {% else %}
-            <p>The Outputlist is empty [].</p>
-            {% endif %}
+        </div>
+
+        <!-- Add a button to show the list content -->
+        <button id="showListButton">Show Output List</button> 
+        <!-- Add a container element for the list content -->
+        <div id="listContainer"></div>
+        <script>
+            const showListButton = document.getElementById('showListButton');
+            const listContainer = document.getElementById('listContainer');
+            const myList = document.getElementById('myList');
+            let isListVisible = false;
+
+            showListButton.addEventListener('click', () => {
+                if (isListVisible) {
+                    listContainer.innerHTML = '';
+                    isListVisible = false;
+                } else {
+                    listContainer.innerHTML = myList.innerHTML;
+                    isListVisible = true;
+                }
+            });
+        </script>
+        
     {% endif %}
+
+    <button id="redirectButton">Contact CPE</button>
+    <script>
+        const redirectButton = document.getElementById('redirectButton');
+    
+        redirectButton.addEventListener('click', () => {
+            window.location.href = 'https://slb001.sharepoint.com/'; // Replace with the URL of your desired page
+        });
+    </script>
+
+    
+      
 
 </body>
 </html>
