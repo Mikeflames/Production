@@ -47,13 +47,18 @@ def pc(request):
 
     if request.method == 'POST':
         xml_file = request.FILES.get('xml_file')
-        ptf_file = request.FILES.get('ptf_file')
+        # ptf_file = request.FILES.get('ptf_file')
+
+        with open('potting_coating\PART_TABLE.txt', 'rb') as f:
+            ptf_file_content = f.readlines()
+        # ptf_file = ptf_file.decode('utf-8')
        
         # ptf_file_content = read_file(ptf_file)
         option = request.POST.get('selected_option')
         # option = request.GET.get('options')
-        if xml_file and ptf_file:
-            ptf_file_content = ptf_file.readlines()
+        # if xml_file and ptf_file:
+        if xml_file :
+            # ptf_file_content = ptf_file.readlines()
             uploaded_xml = request.FILES['xml_file'].name
             print("Both files were uploaded successfully")
             # print("option is ",option)
@@ -69,6 +74,6 @@ def pc(request):
             #                                            'uploaded_xml': uploaded_xml})
             return  render(request, 'upload_xml_1.html', {'result': result,'uploaded_xml': uploaded_xml,'top_list': top_list,'bottom_list': bottom_list,'top': top,'bottom': bottom,'outputlist': outputlist})
         else:
-            print("One or both files were not uploaded, handle the error...")
-            return HttpResponse("Please Upload Both Files Uploaded Correctly!")
+            print("files were not uploaded, handle the error...")
+            return HttpResponse("Please Upload Files Correctly!")
 

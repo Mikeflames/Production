@@ -11,7 +11,8 @@
     <title>Potting/Coating/Underfill Digital Guideline</title>
     <style>
         li{
-            color: black !important;
+            /* color: black !important; */
+            color: black;
             display: inline;
             padding: 20px;
         }
@@ -60,8 +61,10 @@ select {
         {% csrf_token %}
         <label for="xml_file">IPC2581 Design File: </label> 
         <input type="file" name="xml_file" class = 'heading' >
-        <label for="ptf_file">Part-Table file:  </label>
-        <input type="file" name="ptf_file" class = 'heading'>
+        <!-- <label for="ptf_file">Part-Table file:  </label>
+        <input type="file" name="ptf_file" class = 'heading'> -->
+        <label for="csv_file">CSV File: </label> 
+        <input type="file" name="csv_file" class = 'heading' >
         
     
         {% csrf_token %}
@@ -72,7 +75,14 @@ select {
         </select>
         <!-- <input type="submit" value="Result"> -->
         <button type="submit">Result</button>
+        <!-- <button id = "result-button" type="submit">Result</button> -->
     </form>
+
+    <!-- <div id="spinner" style="display:none;">
+        <img src="spinner.gif" alt="Loading..." />
+    </div>
+    <div id = "result-container"></div> -->
+
     <!-- <button type="button">Submit</button> -->
     {% if result %}
         <h3>Results for File: <u>{{ uploaded_xml }}</u></h3>
@@ -142,6 +152,15 @@ select {
             window.location.href = 'https://slb001.sharepoint.com/'; // Replace with the URL of your desired page
         });
     </script>
+
+    <!-- <div id="loading-spinner">
+         Your spinner or progress bar goes here 
+    </div> -->
+  
+
+    <div>
+        <h4 style="text-align: center ;">An Electronic Lifecycle Digitalization CPE solution | &copy; SLB  2023 All Rights Reserved</h4>
+    </div>
 
     
       
