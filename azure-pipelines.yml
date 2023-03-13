@@ -11,11 +11,11 @@ pool:
 strategy:
   matrix:
     Python35:
-      PYTHON_VERSION: '3.5'
+      PYTHON_VERSION: '3.11.1'
     Python36:
-      PYTHON_VERSION: '3.6'
+      PYTHON_VERSION: '3.11.1'
     Python37:
-      PYTHON_VERSION: '3.7'
+      PYTHON_VERSION: '3.11.1'
   maxParallel: 3
 
 steps:
